@@ -6,29 +6,71 @@ let modeOfTransportation = ["vehicle", "public transport", "shoebaru", "bicycle"
 let entertainment = ["movie", "walk", "night cap", "dueling pianos"];
 
 function generateDestination(array){
-    let choice = Math.floor((Math.random()*array.length-1)+1);
-    choice = choice.toString();
-    choice = (array[choice]);
-    return choice
+    let randomIndex = Math.floor((Math.random()*array.length-1)+1);
+    let choice = array[randomIndex];
+    let acceptDecline = confirm(choice);
+        if(acceptDecline == true){
+            return choice;
+        }
+        else if(acceptDecline == false){
+            return generateDestination(destination);
+        }   
 }
-
+//console.log('test',generateDestination);
 function generateRestaurant(array){
-    let choice = Math.floor((Math.random()*array.length-1)+1);
-    choice = choice.toString();
-    choice = (array[choice]);
-    return choice
+    let randomIndex = Math.floor((Math.random()*array.length-1)+1);
+    let choice = array[randomIndex];
+    let acceptDecline = confirm(choice);
+        if(acceptDecline == true){
+            return choice;
+        }
+        else{
+            return generateRestaurant(restaurant);
+        }
+ }
+
+function generateModeOfTransportation(array){
+    let randomIndex = Math.floor((Math.random()*array.length-1)+1);
+    let choice = array[randomIndex];
+    let acceptDecline = confirm(choice);
+        if(acceptDecline == true){
+            return choice;
+        }
+        else{
+            return generateModeOfTransportation(modeOfTransportation);
+        }
 }
 
-}function generateModeOfTransportation(array){
-    let choice = Math.floor((Math.random()*array.length-1)+1);
-    choice = choice.toString();
-    choice = (array[choice]);
-    return choice
+function generateEntertainment(array){
+    let randomIndex = Math.floor((Math.random()*array.length-1)+1);
+    let choice = array[randomIndex];
+    let acceptDecline = confirm(choice);
+        if(acceptDecline == true){
+            return choice;
+        }
+        else{
+            return generateEntertainment(entertainment);
+        }
 }
 
-}function generateEntertainment(array){
-    let choice = Math.floor((Math.random()*array.length-1)+1);
-    choice = choice.toString();
-    choice = (array[choice]);
-    return choice
+function commandPrompt(initialPrompt){
+    let chooseDestination = generateDestination(destination);
+    let chooseRestaurant = generateRestaurant(restaurant);
+    let chooseModeOfTravel = generateModeOfTransportation(modeOfTransportation);
+    let chooseEntertainment = generateEntertainment(entertainment);
+    console.log(chooseDestination,",",chooseRestaurant,",",chooseModeOfTravel,",",chooseEntertainment);
+    let acceptDecline = confirm("Everything look good?");
+    if(acceptDecline == true){
+        console.log("Enjoy your trip!");        
+    }
+    else {
+        return commandPrompt(false);
+    }
+}
+let initialPrompt = confirm("Would you like to generate a random trip?");
+if (initialPrompt == true){
+    commandPrompt(true);
+}
+else {
+    initialPrompt;
 }
